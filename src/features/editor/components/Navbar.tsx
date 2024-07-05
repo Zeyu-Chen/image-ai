@@ -1,5 +1,7 @@
 'use client';
 
+import { cn } from '@/lib/utils';
+
 import {
   ChevronDown,
   Download,
@@ -21,8 +23,17 @@ import { Separator } from '@/components/ui/separator';
 
 import { Logo } from '@/features/editor/components/Logo';
 import { Hint } from '@/components/Hint';
+import { ActiveTool } from '@/features/editor/types';
 
-export const Navbar = () => {
+interface NavbarProps {
+  activeTool: ActiveTool,
+  onChangeActiveTool: (tool: ActiveTool) => void
+}
+
+export const Navbar = ({
+                         activeTool,
+                         onChangeActiveTool
+                       }: NavbarProps) => {
   return (
     <nav className="w-full flex items-center p-4 h-[68px] gap-x-8 border-b lg:pl-[34px]">
       <Logo/>
@@ -55,9 +66,10 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => {
-            }} // todo: add functionality
-            className="" // todo: add dynamic class
+            onClick={() => onChangeActiveTool('select')}
+            className={cn(
+              activeTool === 'select' && 'bg-gray-100'
+            )}
           >
             <MousePointerClick className="size-4"/>
           </Button>
@@ -102,7 +114,8 @@ export const Navbar = () => {
             <DropdownMenuContent align="end" className="min-w-60">
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => {
+                }}
               >
                 <CiFileOn className="size-8"/>
                 <div>
@@ -114,7 +127,8 @@ export const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => {
+                }}
               >
                 <CiFileOn className="size-8"/>
                 <div>
@@ -126,7 +140,8 @@ export const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => {
+                }}
               >
                 <CiFileOn className="size-8"/>
                 <div>
@@ -138,7 +153,8 @@ export const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-x-2"
-                onClick={() => {}}
+                onClick={() => {
+                }}
               >
                 <CiFileOn className="size-8"/>
                 <div>
@@ -150,7 +166,7 @@ export const Navbar = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        {/* todo: add user button */}
+          {/* todo: add user button */}
         </div>
       </div>
     </nav>
